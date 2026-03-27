@@ -1,36 +1,73 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🌸 Кокtem Flower Shop
+Интернет-магазин цветов с полным циклом заказа — от каталога до уведомления администратора в Telegram.
 
-## Getting Started
+## Демо
+[flower-shop.vercel.app](https://flower-shop.vercel.app)
 
-First, run the development server:
+## Стек технологий
+- **Next.js 15** (App Router)
+- **React 19** (hooks, context, reducer)
+- **TypeScript**
+- **Tailwind CSS**
+- **Telegram Bot API**
 
+## Функциональность
+- Каталог товаров с фильтрацией по категориям и поиском
+- Карточка каждого товара с детальной страницей
+- Корзина с управлением количеством (сохраняется в localStorage)
+- Оформление заказа с валидацией формы
+- Уведомление администратора о новом заказе через Telegram бот
+- Скелетон-загрузка, обработка ошибок, адаптивный дизайн
+
+## Структура проекта
+src/
+├── app/
+│   ├── page.tsx              # Главная страница
+│   ├── catalog/page.tsx      # Каталог товаров
+│   ├── product/[id]/page.tsx # Страница товара
+│   ├── cart/page.tsx         # Корзина
+│   ├── checkout/page.tsx     # Оформление заказа
+│   └── api/
+│       ├── products/         # GET /api/products
+│       └── orders/           # POST /api/orders
+├── components/               # UI компоненты
+├── context/                  # CartContext (useReducer)
+├── lib/                      # Утилиты, Telegram helper
+└── types/                    # TypeScript интерфейсы
+
+## Запуск локально
+1. Клонируй репозиторий:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/doaoww/Koktem-Flower-shop.git
+cd Koktem-Flower-shop
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Установи зависимости:
+```bash
+npm install
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. Создай `.env.local` в корне:
+```env
+TELEGRAM_BOT_TOKEN=your_bot_token
+TELEGRAM_ADMIN_CHAT_ID=your_chat_id
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+4. Запусти:
+```bash
+npm run dev
+```
 
-## Learn More
+Открой [http://localhost:3000](http://localhost:3000)
 
-To learn more about Next.js, take a look at the following resources:
+## Настройка Telegram уведомлений
+1. Создай бота через [@BotFather](https://t.me/BotFather) → `/newbot`
+2. Напиши своему боту любое сообщение
+3. Получи `chat_id`: `https://api.telegram.org/bot<TOKEN>/getUpdates`
+4. Вставь токен и chat_id в `.env.local`
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+При каждом новом заказе в Telegram придёт сообщение с именем клиента, телефоном, адресом, составом заказа и суммой.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Деплой
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Проект задеплоен на [Vercel](https://vercel.com). Переменные окружения добавлены через Project Settings → Environment Variables.
