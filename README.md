@@ -1,10 +1,13 @@
 # 🌸 Кокtem Flower Shop
+
 Интернет-магазин цветов с полным циклом заказа — от каталога до уведомления администратора в Telegram.
 
 ## Демо
+
 [koktem-flower-shop.vercel.app](https://koktem-flower-shop.vercel.app/)
 
 ## Стек технологий
+
 - **Next.js 15** (App Router)
 - **React 19** (hooks, context, reducer)
 - **TypeScript**
@@ -12,6 +15,7 @@
 - **Telegram Bot API**
 
 ## Функциональность
+
 - Каталог товаров с фильтрацией по категориям и поиском
 - Карточка каждого товара с детальной страницей
 - Корзина с управлением количеством (сохраняется в localStorage)
@@ -20,6 +24,7 @@
 - Скелетон-загрузка, обработка ошибок, адаптивный дизайн
 
 ## Структура проекта
+
 ```
 src/
 ├── app/
@@ -38,24 +43,29 @@ src/
 ```
 
 ## Запуск локально
+
 1. Клонируй репозиторий:
+
 ```bash
 git clone https://github.com/doaoww/Koktem-Flower-shop.git
 cd Koktem-Flower-shop
 ```
 
 2. Установи зависимости:
+
 ```bash
 npm install
 ```
 
 3. Создай `.env.local` в корне:
+
 ```env
 TELEGRAM_BOT_TOKEN=your_bot_token
 TELEGRAM_ADMIN_CHAT_ID=your_chat_id
 ```
 
 4. Запусти:
+
 ```bash
 npm run dev
 ```
@@ -63,6 +73,7 @@ npm run dev
 Открой [http://localhost:3000](http://localhost:3000)
 
 ## Настройка Telegram уведомлений
+
 1. Создай бота через [@BotFather](https://t.me/BotFather) → `/newbot`
 2. Напиши своему боту любое сообщение
 3. Получи `chat_id`: `https://api.telegram.org/bot<TOKEN>/getUpdates`
@@ -72,4 +83,6 @@ npm run dev
 
 ## Деплой
 
-Проект задеплоен на [Vercel](https://vercel.com). Переменные окружения добавлены через Project Settings → Environment Variables.
+# Проект задеплоен на [Vercel](https://vercel.com). Переменные окружения добавлены через Project Settings → Environment Variables.
+
+# Koktem-Flower-shop
