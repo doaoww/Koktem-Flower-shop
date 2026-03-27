@@ -2,7 +2,7 @@
 Интернет-магазин цветов с полным циклом заказа — от каталога до уведомления администратора в Telegram.
 
 ## Демо
-[flower-shop.vercel.app](https://flower-shop.vercel.app)
+[koktem-flower-shop.vercel.app](https://koktem-flower-shop.vercel.app/)
 
 ## Стек технологий
 - **Next.js 15** (App Router)
