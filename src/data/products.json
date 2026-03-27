@@ -1,0 +1,102 @@
+[
+  {
+    "id": "1",
+    "name": "Букет «Розовая нежность»",
+    "description": "Роскошный букет из 15 розовых роз с эвкалиптом и гипсофилой. Идеально для любого праздника.",
+    "price": 20000,
+    "image": "/flowers/bouquet-pink.jpg",
+    "category": "bouquets",
+    "inStock": true,
+    "popular": true
+  },
+  {
+    "id": "2",
+    "name": "Букет «Летний бриз»",
+    "description": "Яркий букет из ромашек, подсолнухов и синих васильков. Настоящее лето в каждом цветке.",
+    "price": 16500,
+    "image": "/flowers/bouquet-summer.jpg",
+    "category": "bouquets",
+    "inStock": true,
+    "popular": true
+  },
+  {
+    "id": "3",
+    "name": "Букет «Белая классика»",
+    "description": "Элегантный букет из белых пионов и эустомы. Символ чистоты и изящества.",
+    "price": 18500,
+    "image": "/flowers/bouquet-white.jpg",
+    "category": "bouquets",
+    "inStock": true,
+    "popular": false
+  },
+  {
+    "id": "4",
+    "name": "Роза красная",
+    "description": "Свежая красная роза высшего сорта. Длина стебля 60 см.",
+    "price": 13500,
+    "image": "/flowers/rose-red.jpg",
+    "category": "single",
+    "inStock": true,
+    "popular": true
+  },
+  {
+    "id": "5",
+    "name": "Тюльпан",
+    "description": "Нежный тюльпан голландской селекции. Доступны разные оттенки.",
+    "price": 18000,
+    "image": "/flowers/tulip.jpg",
+    "category": "single",
+    "inStock": true,
+    "popular": false
+  },
+  {
+    "id": "6",
+    "name": "Орхидея Фаленопсис",
+    "description": "Белая орхидея в горшке. Цветёт до 3 месяцев. Отличный подарок.",
+    "price": 32000,
+    "image": "/flowers/orchid.jpg",
+    "category": "plants",
+    "inStock": true,
+    "popular": true
+  },
+  {
+    "id": "7",
+    "name": "Суккулент «Эхеверия»",
+    "description": "Компактный и неприхотливый суккулент в декоративном горшке.",
+    "price": 12000,
+    "image": "/flowers/succulent.jpg",
+    "category": "plants",
+    "inStock": true,
+    "popular": false
+  },
+  {
+    "id": "8",
+    "name": "Подарочная коробка с цветами",
+    "description": "Шляпная коробка с розами, рафаэлло и декоративным наполнителем.",
+    "price": 32000,
+    "image": "/flowers/gift-box.jpg",
+    "category": "gift",
+    "inStock": true,
+    "popular": true
+  },
+  {
+    "id": "9",
+    "name": "Цветочная корзина",
+    "description": "Плетёная корзина со свежими сезонными цветами. Состав зависит от сезона.",
+    "price": 17800,
+    "image": "/flowers/gift-basket.jpg",
+    "category": "gift",
+    "inStock": false,
+    "popular": false
+  },
+  {
+    "id": "10",
+    "name": "Букет «Пионовый рай»",
+    "description": "Монобукет из 15 пышных пионов кораллового оттенка. Нежность в каждом лепестке.",
+    "price": 11500,
+    "image": "/flowers/bouquet-peony.jpg",
+    "category": "bouquets",
+    "inStock": true,
+    "popular": true
+  }
+]
