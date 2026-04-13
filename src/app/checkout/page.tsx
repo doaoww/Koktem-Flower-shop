@@ -10,6 +10,8 @@ interface FormData {
   phone: string;
   address: string;
   deliveryDate: string;
+  deliveryTime: string;
+  cardMessage: string;
   comment: string;
 }
 
@@ -29,10 +31,12 @@ export default function CheckoutPage() {
 
   const [form, setForm] = useState<FormData>({
     customerName: "",
-    phone: "",
-    address: "",
-    deliveryDate: "",
-    comment: "",
+  phone: "",
+  address: "",
+  deliveryDate: "",
+  deliveryTime: "",
+  cardMessage: "",
+  comment: "",
   });
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState<string | null>(null);
@@ -171,6 +175,52 @@ export default function CheckoutPage() {
             className="w-full border border-rose-100 rounded-xl px-4 py-2.5 outline-none focus:ring-2 focus:ring-rose-300 text-stone-800 resize-none"
           />
         </div>
+
+        {/* Время доставки */}
+<div>
+  <label className="block text-sm font-semibold text-stone-600 mb-1">
+    Время доставки *
+  </label>
+  <select
+    name="deliveryTime"
+    value={form.deliveryTime}
+    onChange={(e) => setForm(prev => ({ ...prev, deliveryTime: e.target.value }))}
+    className="w-full border border-rose-100 rounded-xl px-4 py-2.5 outline-none focus:ring-2 focus:ring-rose-300 text-stone-800 bg-white"
+  >
+    <option value="">Выберите время</option>
+    <option value="09:00-12:00">09:00 – 12:00</option>
+    <option value="12:00-15:00">12:00 – 15:00</option>
+    <option value="15:00-18:00">15:00 – 18:00</option>
+    <option value="18:00-21:00">18:00 – 21:00</option>
+  </select>
+</div>
+
+{/* Текст на открытке */}
+<div>
+  <label className="block text-sm font-semibold text-stone-600 mb-1">
+    Текст на открытке
+    <span className="text-stone-400 font-normal ml-2">
+      (макс. 120 символов)
+    </span>
+  </label>
+  <textarea
+    name="cardMessage"
+    placeholder="Поздравляю с днём рождения! Желаю..."
+    value={form.cardMessage}
+    onChange={(e) => {
+      if (e.target.value.length <= 120) {
+        setForm(prev => ({ ...prev, cardMessage: e.target.value }));
+      }
+    }}
+    rows={3}
+    className="w-full border border-rose-100 rounded-xl px-4 py-2.5 outline-none focus:ring-2 focus:ring-rose-300 text-stone-800 resize-none"
+  />
+  <p className={`text-xs mt-1 text-right ${
+    form.cardMessage.length > 100 ? "text-rose-500" : "text-stone-400"
+  }`}>
+    {form.cardMessage.length}/120
+  </p>
+</div>
 
         <div className="bg-rose-50 rounded-xl p-4 text-sm text-stone-600 space-y-1">
           <p className="font-bold text-stone-700 mb-2">Состав заказа:</p>

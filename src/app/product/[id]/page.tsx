@@ -7,6 +7,7 @@ import Link from "next/link";
 import { ShoppingBag, ArrowLeft, CheckCircle2 } from "lucide-react";
 import { Product, CATEGORY_LABELS } from "@/types";
 import { useCart } from "@/context/CartContext";
+import FrequentlyBought from "@/components/FrequentlyBought";
 
 export default function ProductPage() {
   const params = useParams();
@@ -145,5 +146,9 @@ export default function ProductPage() {
         </div>
       </div>
     </div>
+    
   );
+  <FrequentlyBought />
+  
 }
+

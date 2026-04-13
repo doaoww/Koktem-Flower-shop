@@ -3,9 +3,10 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { ShoppingBag, Star } from "lucide-react";
+import { ShoppingBag, Star, Heart } from "lucide-react";
 import { Product } from "@/types";
 import { useCart } from "@/context/CartContext";
+import { useWishlist } from "@/context/WishlistContext";
 
 interface Props {
   product: Product;
@@ -14,7 +15,10 @@ interface Props {
 
 export default function ProductCard({ product, priority = false }: Props) {
   const { addItem } = useCart();
+  const { toggle, isWishlisted } = useWishlist();
   const [added, setAdded] = useState(false);
+  
+  const wishlisted = isWishlisted(product.id);
 
   function handleAdd(e: React.MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
@@ -23,6 +27,12 @@ export default function ProductCard({ product, priority = false }: Props) {
     addItem(product);
     setAdded(true);
     setTimeout(() => setAdded(false), 1500);
+  }
+
+  function handleWishlist(e: React.MouseEvent<HTMLButtonElement>) {
+    e.preventDefault();
+    e.stopPropagation();
+    toggle(product);
   }
 
   return (
@@ -43,6 +53,16 @@ export default function ProductCard({ product, priority = false }: Props) {
               Хит
             </span>
           )}
+          <button
+            onClick={handleWishlist}
+            className="absolute top-3 right-3 w-8 h-8 rounded-full bg-white/80 backdrop-blur flex items-center justify-center shadow-sm hover:scale-110 transition-transform"
+          >
+            <Heart
+              className={`w-4 h-4 transition-colors ${
+                wishlisted ? "fill-rose-500 text-rose-500" : "text-stone-400"
+              }`}
+            />
+          </button>
           {!product.inStock && (
             <div className="absolute inset-0 bg-white/60 flex items-center justify-center">
               <span className="text-stone-500 font-semibold">

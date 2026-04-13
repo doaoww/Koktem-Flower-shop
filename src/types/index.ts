@@ -5,6 +5,7 @@ export interface Product {
   price: number;
   image: string;
   category: "bouquets" | "single" | "plants" | "gift";
+  occasion: Occasion[];
   inStock: boolean;
   popular: boolean;
 }
@@ -34,4 +35,15 @@ export const CATEGORY_LABELS: Record<string, string> = {
   single: "Цветы поштучно",
   plants: "Растения",
   gift: "Подарки",
+};
+
+export type Occasion = "all" | "birthday" | "date" | "sorry" | "mom" | "wedding";
+
+export const OCCASION_LABELS: Record<Occasion, string> = {
+  all: "Все поводы",
+  birthday: "🎂 День рождения",
+  date: "❤️ Свидание",
+  sorry: "🙏 Извини",
+  mom: "🌷 Маме",
+  wedding: "💍 Свадьба",
 };

@@ -1,11 +1,13 @@
 "use client";
 import Link from "next/link";
 import { useCart } from "@/context/CartContext";
-import { ShoppingBag, Flower2, Menu, X } from "lucide-react";
+import { useWishlist } from "@/context/WishlistContext";
+import { ShoppingBag, Flower2, Menu, X, Heart } from "lucide-react";
 import { useState } from "react";
 
 export default function Navbar() {
   const { count } = useCart();
+  const { count: wishCount } = useWishlist();
   const [menuOpen, setMenuOpen] = useState(false);
 
   const links = [
@@ -38,8 +40,19 @@ export default function Navbar() {
           ))}
         </div>
 
-        {/* Cart + mobile menu */}
+        {/* Cart + Wishlist + mobile menu */}
         <div className="flex items-center gap-3">
+          <Link
+            href="/wishlist"
+            className="relative p-2 hover:bg-rose-50 rounded-full transition-colors"
+          >
+            <Heart className="w-6 h-6 text-stone-700" />
+            {wishCount > 0 && (
+              <span className="absolute -top-1 -right-1 bg-rose-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold">
+                {wishCount}
+              </span>
+            )}
+          </Link>
           <Link
             href="/cart"
             className="relative p-2 hover:bg-rose-50 rounded-full transition-colors"
