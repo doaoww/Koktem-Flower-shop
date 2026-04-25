@@ -20,6 +20,11 @@ const nunito = Nunito({
 export const metadata: Metadata = {
   title: "Цветочный | Магазин цветов",
   description: "Свежие цветы и букеты с доставкой",
+  icons: {
+    icon: "/favicon.ico",
+    shortcut: "/favicon-16x16.png",
+    apple: "/apple-touch-icon.png",
+  },
 };
 
 export default function RootLayout({

@@ -41,9 +41,9 @@ export type Occasion = "all" | "birthday" | "date" | "sorry" | "mom" | "wedding"
 
 export const OCCASION_LABELS: Record<Occasion, string> = {
   all: "Все поводы",
-  birthday: "🎂 День рождения",
-  date: "❤️ Свидание",
-  sorry: "🙏 Извини",
-  mom: "🌷 Маме",
-  wedding: "💍 Свадьба",
+  birthday: "День рождения",
+  date: "Свидание",
+  sorry: "Извини",
+  mom: "Маме",
+  wedding: "Свадьба",
 };
