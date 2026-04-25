@@ -5,6 +5,8 @@ import { CartProvider } from "@/context/CartContext";
 import { WishlistProvider } from "@/context/WishlistContext";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import SessionProviderWrapper from "@/components/SessionProviderWrapper";
+import AiConsultant from "@/components/AiConsultant";
 
 const playfair = Playfair_Display({
   subsets: ["cyrillic"],
@@ -28,13 +30,16 @@ export default function RootLayout({
   return (
     <html lang="ru" className={`${playfair.variable} ${nunito.variable}`}>
       <body className="bg-rose-50 text-stone-800 font-nunito min-h-screen flex flex-col">
-        <CartProvider>
-          <WishlistProvider>
-            <Navbar />
-            <main className="flex-1">{children}</main>
-            <Footer />
-          </WishlistProvider>
-        </CartProvider>
+        <SessionProviderWrapper>
+          <CartProvider>
+            <WishlistProvider>
+              <Navbar />
+              <main className="flex-1">{children}</main>
+              <Footer />
+            </WishlistProvider>
+          </CartProvider>
+        </SessionProviderWrapper>
+        <AiConsultant />
       </body>
     </html>
   );

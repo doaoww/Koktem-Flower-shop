@@ -1,9 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { CheckCircle2, Loader2 } from "lucide-react";
+import { Loader2 } from "lucide-react";
 import { useCart } from "@/context/CartContext";
+import { useSession } from "next-auth/react";
 
 interface FormData {
   customerName: string;
@@ -26,21 +27,41 @@ interface Field {
 export default function CheckoutPage() {
   const { items, total, clearCart } = useCart();
   const router = useRouter();
+  const { data: session } = useSession();
 
   const today = new Date().toISOString().split("T")[0];
 
   const [form, setForm] = useState<FormData>({
     customerName: "",
-  phone: "",
-  address: "",
-  deliveryDate: "",
-  deliveryTime: "",
-  cardMessage: "",
-  comment: "",
+    phone: "",
+    address: "",
+    deliveryDate: "",
+    deliveryTime: "",
+    cardMessage: "",
+    comment: "",
   });
   const [loading, setLoading] = useState(false);
-  const [success, setSuccess] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+
+  // Автозаполнение данных из профиля
+  useEffect(() => {
+    if (!session) return;
+    
+    async function loadProfile() {
+      const res = await fetch("/api/user/profile");
+      if (res.ok) {
+        const data = await res.json();
+        setForm((prev) => ({
+          ...prev,
+          customerName: data.name ?? prev.customerName,
+          phone: data.phone ?? prev.phone,
+          address: data.address ?? prev.address,
+        }));
+      }
+    }
+    
+    loadProfile();
+  }, [session]);
 
   function handleChange(
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -53,7 +74,8 @@ export default function CheckoutPage() {
       !form.customerName ||
       !form.phone ||
       !form.address ||
-      !form.deliveryDate
+      !form.deliveryDate ||
+      !form.deliveryTime
     ) {
       setError("Пожалуйста, заполните все обязательные поля");
       return;
@@ -76,38 +98,16 @@ export default function CheckoutPage() {
       const data = await res.json();
       if (!res.ok) throw new Error(data.error);
 
-      setSuccess(data.orderId);
+      // Очищаем корзину и перенаправляем на страницу заказа
       clearCart();
+      router.push(`/order/${data.orderId}`);
+      
     } catch (err: unknown) {
       const message =
         err instanceof Error ? err.message : "Ошибка оформления заказа";
       setError(message);
-    } finally {
       setLoading(false);
     }
-  }
-
-  if (success) {
-    return (
-      <div className="max-w-lg mx-auto px-4 py-24 text-center">
-        <CheckCircle2 className="w-16 h-16 text-green-500 mx-auto mb-4" />
-        <h2 className="font-playfair text-3xl font-bold text-stone-800 mb-2">
-          Заказ оформлен!
-        </h2>
-        <p className="text-stone-500 mb-2">
-          Номер заказа: <strong className="text-stone-700">#{success}</strong>
-        </p>
-        <p className="text-stone-500 mb-8">
-          Мы свяжемся с вами для подтверждения.
-        </p>
-        <button
-          onClick={() => router.push("/")}
-          className="bg-rose-500 text-white px-8 py-3 rounded-xl font-semibold hover:bg-rose-600 transition-colors"
-        >
-          На главную
-        </button>
-      </div>
-    );
   }
 
   const fields: Field[] = [
@@ -144,6 +144,12 @@ export default function CheckoutPage() {
         Оформление заказа
       </h1>
 
+      {session && (
+        <div className="bg-green-50 border border-green-200 rounded-xl p-3 mb-4 text-sm text-green-700">
+          ✓ Данные автоматически загружены из вашего профиля
+        </div>
+      )}
+
       <div className="bg-white rounded-2xl p-8 shadow-sm border border-rose-50 space-y-5">
         {fields.map((f) => (
           <div key={f.name}>
@@ -177,50 +183,50 @@ export default function CheckoutPage() {
         </div>
 
         {/* Время доставки */}
-<div>
-  <label className="block text-sm font-semibold text-stone-600 mb-1">
-    Время доставки *
-  </label>
-  <select
-    name="deliveryTime"
-    value={form.deliveryTime}
-    onChange={(e) => setForm(prev => ({ ...prev, deliveryTime: e.target.value }))}
-    className="w-full border border-rose-100 rounded-xl px-4 py-2.5 outline-none focus:ring-2 focus:ring-rose-300 text-stone-800 bg-white"
-  >
-    <option value="">Выберите время</option>
-    <option value="09:00-12:00">09:00 – 12:00</option>
-    <option value="12:00-15:00">12:00 – 15:00</option>
-    <option value="15:00-18:00">15:00 – 18:00</option>
-    <option value="18:00-21:00">18:00 – 21:00</option>
-  </select>
-</div>
+        <div>
+          <label className="block text-sm font-semibold text-stone-600 mb-1">
+            Время доставки *
+          </label>
+          <select
+            name="deliveryTime"
+            value={form.deliveryTime}
+            onChange={(e) => setForm(prev => ({ ...prev, deliveryTime: e.target.value }))}
+            className="w-full border border-rose-100 rounded-xl px-4 py-2.5 outline-none focus:ring-2 focus:ring-rose-300 text-stone-800 bg-white"
+          >
+            <option value="">Выберите время</option>
+            <option value="09:00-12:00">09:00 – 12:00</option>
+            <option value="12:00-15:00">12:00 – 15:00</option>
+            <option value="15:00-18:00">15:00 – 18:00</option>
+            <option value="18:00-21:00">18:00 – 21:00</option>
+          </select>
+        </div>
 
-{/* Текст на открытке */}
-<div>
-  <label className="block text-sm font-semibold text-stone-600 mb-1">
-    Текст на открытке
-    <span className="text-stone-400 font-normal ml-2">
-      (макс. 120 символов)
-    </span>
-  </label>
-  <textarea
-    name="cardMessage"
-    placeholder="Поздравляю с днём рождения! Желаю..."
-    value={form.cardMessage}
-    onChange={(e) => {
-      if (e.target.value.length <= 120) {
-        setForm(prev => ({ ...prev, cardMessage: e.target.value }));
-      }
-    }}
-    rows={3}
-    className="w-full border border-rose-100 rounded-xl px-4 py-2.5 outline-none focus:ring-2 focus:ring-rose-300 text-stone-800 resize-none"
-  />
-  <p className={`text-xs mt-1 text-right ${
-    form.cardMessage.length > 100 ? "text-rose-500" : "text-stone-400"
-  }`}>
-    {form.cardMessage.length}/120
-  </p>
-</div>
+        {/* Текст на открытке */}
+        <div>
+          <label className="block text-sm font-semibold text-stone-600 mb-1">
+            Текст на открытке
+            <span className="text-stone-400 font-normal ml-2">
+              (макс. 120 символов)
+            </span>
+          </label>
+          <textarea
+            name="cardMessage"
+            placeholder="Поздравляю с днём рождения! Желаю..."
+            value={form.cardMessage}
+            onChange={(e) => {
+              if (e.target.value.length <= 120) {
+                setForm(prev => ({ ...prev, cardMessage: e.target.value }));
+              }
+            }}
+            rows={3}
+            className="w-full border border-rose-100 rounded-xl px-4 py-2.5 outline-none focus:ring-2 focus:ring-rose-300 text-stone-800 resize-none"
+          />
+          <p className={`text-xs mt-1 text-right ${
+            form.cardMessage.length > 100 ? "text-rose-500" : "text-stone-400"
+          }`}>
+            {form.cardMessage.length}/120
+          </p>
+        </div>
 
         <div className="bg-rose-50 rounded-xl p-4 text-sm text-stone-600 space-y-1">
           <p className="font-bold text-stone-700 mb-2">Состав заказа:</p>

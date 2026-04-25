@@ -4,6 +4,7 @@ import { useCart } from "@/context/CartContext";
 import { useWishlist } from "@/context/WishlistContext";
 import { ShoppingBag, Flower2, Menu, X, Heart } from "lucide-react";
 import { useState } from "react";
+import AuthButton from "@/components/AuthButton";
 
 export default function Navbar() {
   const { count } = useCart();
@@ -64,6 +65,7 @@ export default function Navbar() {
               </span>
             )}
           </Link>
+          <AuthButton />
           <button
             className="md:hidden p-2"
             onClick={() => setMenuOpen((v) => !v)}
