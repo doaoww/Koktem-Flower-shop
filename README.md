@@ -45,11 +45,12 @@ Click **"Подтвердить заказ"** — the order is saved to the data
 
 **6. Track Your Order**
 After placing an order, you are redirected to `/order/[id]` — a live status page that refreshes every 30 seconds:
-
+```
 ✅ Заказ принят
 ✅ Собираем букет
 🚚 Курьер в пути     ← current status
 ⬜ Доставлено
+```
 ---
 
 ### For the Shop Administrator
@@ -60,7 +61,7 @@ Every new order triggers an instant message to the admin's Telegram:
 ```
 🌸 НОВЫЙ ЗАКАЗ #A3F2B1
 
-👤 Клиент: Айгерим Сейткали
+👤 Клиент: Вахитова Диляра
 📞 Телефон: +7 (777) 123-45-67
 📍 Адрес: Алматы, ул. Абая 10, кв. 5
 📅 Дата доставки: 28.04.2026 · 12:00–15:00
@@ -71,6 +72,8 @@ Every new order triggers an instant message to the admin's Telegram:
 
 💰 Итого: 8 500 ₸
 🕐 Время заказа: 27.04.2026, 14:32
+
+```
 
 **Updating Order Status**
 Use the admin API to move an order through delivery stages:
