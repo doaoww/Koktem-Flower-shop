@@ -109,19 +109,19 @@ The customer's tracking page updates automatically.
 
 ## ✨ Features
 
-- 🗂 Catalog with category + occasion filters and live search
-- 🤖 AI floral consultant (Gemini) — recommends products from real catalog
-- 🛒 Shopping cart — quantity controls, persisted in `localStorage`
-- ❤️ Wishlist — save products for later
-- 🔐 Google OAuth authentication via NextAuth v5
-- 👤 User profile — saved name, phone, address; auto-fills checkout
-- 📋 Checkout form with full client-side validation
-- 📦 Order saved to PostgreSQL (Neon) via Prisma
-- 📲 Instant Telegram notification to admin on new order
-- 📍 Real-time order status tracker (polls every 30s)
-- 💳 Admin API to update delivery status with secret key auth
-- 💀 Loading skeletons for async content
-- 📱 Fully responsive, mobile-first design
+- Catalog with category + occasion filters and live search
+- AI floral consultant (Gemini) — recommends products from real catalog
+- Shopping cart — quantity controls, persisted in `localStorage`
+- Wishlist — save products for later
+- Google OAuth authentication via NextAuth v5
+- User profile — saved name, phone, address; auto-fills checkout
+- Checkout form with full client-side validation
+- Order saved to PostgreSQL (Neon) via Prisma
+- Instant Telegram notification to admin on new order
+- Real-time order status tracker (polls every 30s)
+- Admin API to update delivery status with secret key auth
+- Loading skeletons for async content
+- Fully responsive, mobile-first design
 
 ---
 
@@ -296,7 +296,6 @@ npm run seed     # Seed database with products
 **doaoww** — [github.com/doaoww](https://github.com/doaoww)
 
 Built as a full-stack portfolio project demonstrating Next.js App Router, TypeScript, Prisma ORM, NextAuth, AI integration, and real-world e-commerce patterns.
-```
 
 ```bash
 git add README.md
