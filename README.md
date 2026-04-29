@@ -1,5 +1,4 @@
-```markdown
-# 🌸 Кокtem Flower Shop
+🌸 Кокtem Flower Shop
 
 > A full-stack flower shop e-commerce web application built as a portfolio project. Features AI-powered bouquet consultation, Google authentication, real-time order tracking, and instant Telegram notifications for the shop administrator.
 
@@ -47,13 +46,10 @@ Click **"Подтвердить заказ"** — the order is saved to the data
 **6. Track Your Order**
 After placing an order, you are redirected to `/order/[id]` — a live status page that refreshes every 30 seconds:
 
-```
 ✅ Заказ принят
 ✅ Собираем букет
 🚚 Курьер в пути     ← current status
 ⬜ Доставлено
-```
-
 ---
 
 ### For the Shop Administrator
@@ -75,7 +71,6 @@ Every new order triggers an instant message to the admin's Telegram:
 
 💰 Итого: 8 500 ₸
 🕐 Время заказа: 27.04.2026, 14:32
-```
 
 **Updating Order Status**
 Use the admin API to move an order through delivery stages:
